@@ -49,6 +49,12 @@ export const deck = (() => {
   return deck;
 })();
 
+export const initialState = {
+  cardsInDeck: deck,
+  cardsOnTable: [],
+  selectedCards: [],
+};
+
 export const removeCard = cardsInDeck => {
   let index = Math.ceil(cardsInDeck.length * Math.random());;
   return [
