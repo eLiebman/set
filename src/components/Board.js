@@ -1,24 +1,20 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 
-import { pickCards } from '../../utils.js';
+import { pickCards } from '../utils.js';
 
-import Card from '../Card';
-import '../../App.css';
+import Card from './Card.js';
+import '../App.css';
 
 const Board = ({
   cardsOnTable,
-  setCardsOnTable,
-  cardsInDeck,
-  setCardsInDeck,
+  dealCards,
   selectCard,
   selectedCards,
 }) => {
   useEffect(() => {
-    const [cardsVisible, cardsLeft] = pickCards(cardsInDeck, 12);
-    setCardsOnTable(cardsVisible);
-    // setCardsInDeck(cardsLeft);
-  }, [cardsInDeck, setCardsOnTable]);
+    dealCards(12);
+    console.log('dealing');
+  }, []);
 
   return (
     <div className="container">

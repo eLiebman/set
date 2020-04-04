@@ -7,9 +7,9 @@ import {
   colorMap,
   shapeMap,
   patternMap,
-} from '../../utils.js';
+} from '../utils.js';
 
-import '../../App.css';
+import '../App.css';
 
 const Card = ({ color, number, shape, pattern, selected, onClick, }) => {
   return (
