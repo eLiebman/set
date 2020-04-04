@@ -15,6 +15,11 @@ export default (state, action) => {
         ...state,
         selectedCards: action.selectedCards,
       };
+    case 'INITIAL_RENDER_COMPLETE':
+      return {
+        ...state,
+        initialRender: false,
+      };
     default:
       return state;
   }

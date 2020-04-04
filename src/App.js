@@ -13,26 +13,9 @@ import s from './App.css';
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const {
-    cardsInDeck,
-    cardsOnTable,
-    selectedCards,
-  } = state;
-  
-  const dealCards = number => {
-    const [newCards, remainingCards] = pickCards(number, cardsInDeck);
-    dispatch({
-      type: 'SET_CARDS_IN_DECK',
-      cardsInDeck: [...remainingCards]
-    });
-    dispatch({
-      type: 'SET_CARDS_ON_TABLE',
-      cardsOnTable: [ ...cardsOnTable, ...newCards ]
-    });
-  };
 
   const selectCard = key => {
-    console.log(key);
+    const { selectedCards } = state;
     if (selectedCards.includes(key)) {
       dispatch({
         type: 'SET_SELECTED_CARDS',
@@ -51,23 +34,55 @@ function App() {
   };
 
   useEffect(() => {
-    if (selectedCards.length === 3) {
-      console.log(
-        isSet(
-          selectedCards.map(key => cardsOnTable.find(card => card.key === key))
-        )
-      )
+    const { cardsInDeck, cardsOnTable, selectedCards, initialRender } = state;
+    
+    const dealCards = number => {
+      const [newCards, remainingCards] = pickCards(number, cardsInDeck);
+      dispatch({
+        type: 'SET_CARDS_IN_DECK',
+        cardsInDeck: [...remainingCards]
+      });
+      dispatch({
+        type: 'SET_CARDS_ON_TABLE',
+        cardsOnTable: [...cardsOnTable, ...newCards]
+      });
+    };
+
+    const replaceSelectedCards = () => {
+      dispatch({
+        type: 'SET_CARDS_ON_TABLE',
+        cardsOnTable: [
+          ...cardsOnTable.filter(card => !selectedCards.includes(card.key))
+        ],
+      });
+      dispatch({
+        type: 'SET_SELECTED_CARDS',
+        selectedCards: [],
+      });
+      dealCards(3);
     }
-  }, [selectedCards, cardsOnTable]);
+
+    if (initialRender) {
+      dealCards(12)
+      dispatch({
+        type: 'INITIAL_RENDER_COMPLETE',
+      });
+    };
+
+    if (state.selectedCards.length === 3) {
+      if (isSet(state.selectedCards.map(key =>
+        state.cardsOnTable.find(card => card.key === key)))
+      ) {
+        replaceSelectedCards();
+      } else {
+
+      }
+    }
+  }, [state]);
 
   return (
     <div className={s.container}>
-      <Board
-        cardsOnTable={cardsOnTable}
-        dealCards={dealCards}
-        selectCard={selectCard}
-        selectedCards={selectedCards}
-      />
+      <Board state={state} selectCard={selectCard} />
     </div>
   );
 }

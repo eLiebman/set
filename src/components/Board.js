@@ -6,15 +6,12 @@ import Card from './Card.js';
 import '../App.css';
 
 const Board = ({
-  cardsOnTable,
-  dealCards,
+  state: {
+    cardsOnTable,
+    selectedCards,
+  },
   selectCard,
-  selectedCards,
 }) => {
-  useEffect(() => {
-    dealCards(12);
-    console.log('dealing');
-  }, []);
 
   return (
     <div className="container">
