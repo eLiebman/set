@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useReducer } from 'react';
+
+import reducer from './reducer.js';
 
 import Board from './components/Board.js';
 import {
-  deck,
+  initialState,
   isSet,
   pickCards,
 } from './utils.js';
@@ -10,26 +12,41 @@ import {
 import s from './App.css';
 
 function App() {
-  const [cardsInDeck, setCardsInDeck] = useState([...deck]);
-  const [cardsOnTable, setCardsOnTable] = useState([]);
-  const [selectedCards, setSelectedCards] = useState([]);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const {
+    cardsInDeck,
+    cardsOnTable,
+    selectedCards,
+  } = state;
   
   const dealCards = number => {
     const [newCards, remainingCards] = pickCards(number, cardsInDeck);
-    setCardsInDeck([...remainingCards]);
-    setCardsOnTable([ ...cardsOnTable, ...newCards ]);
+    dispatch({
+      type: 'SET_CARDS_IN_DECK',
+      cardsInDeck: [...remainingCards]
+    });
+    dispatch({
+      type: 'SET_CARDS_ON_TABLE',
+      cardsOnTable: [ ...cardsOnTable, ...newCards ]
+    });
   };
 
   const selectCard = key => {
+    console.log(key);
     if (selectedCards.includes(key)) {
-      setSelectedCards(
+      dispatch({
+        type: 'SET_SELECTED_CARDS',
+        selectedCards:
         [ ...selectedCards.filter(selectedCard => selectedCard !== key)]
-      );
+      });
     } else {
-      setSelectedCards([
-        ...selectedCards,
-        key,
-      ]);
+      dispatch({
+        type: 'SET_SELECTED_CARDS',
+        selectedCards: [
+          ...selectedCards,
+          key,
+        ]
+      });
     }
   };
 
