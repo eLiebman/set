@@ -49,17 +49,22 @@ function App() {
     };
 
     const replaceSelectedCards = () => {
+      const [newCards, remainingCards] =  pickCards(3, cardsInDeck);
       dispatch({
         type: 'SET_CARDS_ON_TABLE',
         cardsOnTable: [
-          ...cardsOnTable.filter(card => !selectedCards.includes(card.key))
+          ...cardsOnTable.filter(card => !selectedCards.includes(card.key)),
+          ...newCards,
         ],
       });
       dispatch({
         type: 'SET_SELECTED_CARDS',
         selectedCards: [],
       });
-      dealCards(3);
+      dispatch({
+        type: 'SET_CARDS_IN_DECK',
+        cardsInDeck: [...remainingCards],
+      });
     }
 
     if (initialRender) {
