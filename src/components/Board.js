@@ -1,20 +1,14 @@
 import React, { useEffect } from 'react';
-
-import { pickCards } from '../utils.js';
+import PropTypes from 'prop-types';
 
 import Card from './Card.js';
 import '../App.css';
 
 const Board = ({
   cardsOnTable,
-  dealCards,
-  selectCard,
   selectedCards,
+  selectCard,
 }) => {
-  useEffect(() => {
-    dealCards(12);
-    console.log('dealing');
-  }, []);
 
   return (
     <div className="container">
@@ -29,6 +23,12 @@ const Board = ({
         );
       })}
     </div>
-);}
+)};
+
+Board.propTypes = {
+  cardsOnTable: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  selectedCards: PropTypes.arrayOf(PropTypes.number).isRequired,
+  selectCard: PropTypes.func.isRequired,
+};
 
 export default Board;

@@ -53,6 +53,7 @@ export const initialState = {
   cardsInDeck: deck,
   cardsOnTable: [],
   selectedCards: [],
+  initialRender: true,
 };
 
 export const removeCard = cardsInDeck => {
