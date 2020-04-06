@@ -57,7 +57,7 @@ export const initialState = {
 };
 
 export const removeCard = cardsInDeck => {
-  let index = Math.ceil(cardsInDeck.length * Math.random());;
+  let index = Math.floor(cardsInDeck.length * Math.random());;
   return [
     cardsInDeck[index],
     [
