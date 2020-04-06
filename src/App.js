@@ -22,7 +22,8 @@ function App() {
         selectedCards:
         [ ...selectedCards.filter(selectedCard => selectedCard !== key)]
       });
-    } else {
+    } else if (selectedCards.length === 3) return;
+    else {
       dispatch({
         type: 'SET_SELECTED_CARDS',
         selectedCards: [
@@ -84,7 +85,10 @@ function App() {
       ) {
         replaceSelectedCards();
       } else {
-
+        dispatch({
+          type: 'SET_SELECTED_CARDS',
+          selectedCards: [],
+        })
       }
     }
   }, [state]);
