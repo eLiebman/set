@@ -53,8 +53,12 @@ function App() {
       dispatch({
         type: 'SET_CARDS_ON_TABLE',
         cardsOnTable: [
-          ...cardsOnTable.filter(card => !selectedCards.includes(card.key)),
-          ...newCards,
+          ...cardsOnTable.map(card => {
+            if (selectedCards.includes(card.key)) {
+              return newCards.pop();
+            }
+            return card;
+          })
         ],
       });
       dispatch({
