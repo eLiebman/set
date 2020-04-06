@@ -1,12 +1,15 @@
 body {
-  background-color: #D8DCF9;
+  background-color: #e0f5ff;
 }
 
 .container {
+  padding-top: 64px;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-flow: row wrap;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
 }
 
 .card {
@@ -19,10 +22,9 @@ body {
   padding: 16px;
   margin: 16px;
   border-radius: 8px;
-  border: 2px solid black;
   outline: none;
-  box-shadow: 2px 2px grey;
-  background-color: #415BE8;
+  box-shadow: 0 2px 3px #7b92b3;
+  background-color: #fffeed;
 }
 
 .shape {
@@ -32,6 +34,7 @@ body {
   margin: 16px;
   background-color: transparent;
   border: 2px solid transparent;
+  box-shadow: 0 2px 3px #7b92b3;
 }
 
 .oval {
@@ -43,7 +46,6 @@ body {
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 51%);
   width: 54px;
   height: 104px;
-  border: none;
 }
 
 .rectangle {
@@ -66,25 +68,17 @@ body {
 }
 
 .selected {
-  border-color: gold;
+  box-shadow: 0 6px 9px #2f4f7d;
 }
 
 .clear {
-  box-shadow: 2px 2px inset grey;
-}
-
-.clear:before {
-  display: block;
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 50px;
-  height: 100px;
-  background-color: #D8DCF9;
-}
-
-.solid {
-
+  background: repeating-linear-gradient(
+  45deg,
+  white,
+  white 4px,
+  #a3ffb7 4px,
+  #a3ffb7 12px
+);
 }
 
 .polkaDot {
