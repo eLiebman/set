@@ -38,7 +38,9 @@ body {
 }
 
 .oval {
-  border-radius: 27px / 50px;
+  /* border-radius: 27px / 50px; */
+  border-radius: 50%;
+  height: 50px;
 }
 
 .diamond {
@@ -50,6 +52,7 @@ body {
 
 .rectangle {
   border-radius: 8px / 50px;
+  height: 75px;
 }
 
 .red {
@@ -63,8 +66,8 @@ body {
 }
 
 .purple {
-  background-color: #a3ffb7;
-  border-color: #a3ffb7;
+  background-color: #53e055;
+  border-color: #53e055;
 }
 
 .selected {
@@ -76,8 +79,8 @@ body {
   45deg,
   white,
   white 4px,
-  #a3ffb7 4px,
-  #a3ffb7 12px
+  #53e055 4px,
+  #53e055 12px
 );
 }
 
