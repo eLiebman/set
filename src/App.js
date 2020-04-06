@@ -87,7 +87,11 @@ function App() {
 
   return (
     <div className={s.container}>
-      <Board state={state} selectCard={selectCard} />
+      <Board
+        cardsOnTable={state.cardsOnTable}
+        selectedCards={state.selectedCards}
+        selectCard={selectCard}
+      />
     </div>
   );
 }
