@@ -24,7 +24,7 @@ export const colorMap = {
 export const shapeMap = {
   1: 'oval',
   2: 'diamond',
-  3: 'squiggle',
+  3: 'rectangle',
 }
 
 export const patternMap = {

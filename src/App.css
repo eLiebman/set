@@ -1,3 +1,7 @@
+body {
+  background-color: #D8DCF9;
+}
+
 .container {
   display: flex;
   flex-flow: row wrap;
@@ -18,48 +22,65 @@
   border: 2px solid black;
   outline: none;
   box-shadow: 2px 2px grey;
+  background-color: #415BE8;
+}
+
+.shape {
+  height: 100px;
+  width: 50px;
+  max-width: 50px;
+  margin: 16px;
+  background-color: transparent;
+  border: 2px solid transparent;
+}
+
+.oval {
+  border-radius: 27px / 50px;
+}
+
+.diamond {
+  position: relative;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 51%);
+  width: 54px;
+  height: 104px;
+  border: none;
+}
+
+.rectangle {
+  border-radius: 8px / 50px;
+}
+
+.red {
+  background-color: #F2ADE5;
+  border-color: #F2ADE5;
+}
+
+.green {
+  background-color: #96efff;
+  border-color: #96efff;
+}
+
+.purple {
+  background-color: #a3ffb7;
+  border-color: #a3ffb7;
 }
 
 .selected {
   border-color: gold;
 }
 
-.red {
-  background-color: red;
-  border: 2px solid red;
-}
-
-.green {
-  background-color: green;
-  border: 2px solid green;
-}
-
-.purple {
-  background-color: purple;
-  border: 2px solid purple;
-}
-
-.shape {
-  height: 100px;
-  width: 50px;
-  margin: 16px;
-}
-
-.oval {
-  border-radius: 16px;
-}
-
-.diamond {
-
-}
-
-.squiggle {
-  border-top-right-radius: 16px;
-  border-top-left-radius: 16px;
-}
-
 .clear {
-  background-color: white;
+  box-shadow: 2px 2px inset grey;
+}
+
+.clear:before {
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 50px;
+  height: 100px;
+  background-color: #D8DCF9;
 }
 
 .solid {
