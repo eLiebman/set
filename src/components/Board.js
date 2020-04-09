@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Card from './Card.js';
-import '../App.css';
+import '../App.scss';
 
 const Board = ({
   cardsOnTable,

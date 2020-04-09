@@ -9,7 +9,7 @@ import {
   pickCards,
 } from './utils.js';
 
-import s from './App.css';
+import s from './App.scss';
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -36,7 +36,7 @@ function App() {
 
   useEffect(() => {
     const { cardsInDeck, cardsOnTable, selectedCards, initialRender } = state;
-    
+
     const dealCards = number => {
       const [newCards, remainingCards] = pickCards(number, cardsInDeck);
       dispatch({

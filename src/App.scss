@@ -1,0 +1,139 @@
+//shape vars
+$shape-height: 120px;
+$shape-width: $shape-height / 2;
+$shape-margin: 8px;
+$shape-border-width: 2px;
+$shape-rotation: 63; //in deg
+$max-shapes-per-card: 3;
+$shape-shadow: 0 2px 3px #7B92B3;
+
+//card vars
+$card-height: 150px;
+$card-width: 250px;
+$card-padding: 16px;
+$card-margin: 16px;
+$card-border-radius: 8px;
+$card-shadow: 0 2px 3px #7B92B3;
+$selected-shadow: 0 4px 6px #424E60;
+
+//define colors
+$shape-colors: ('red': #F2ADE5, 'green': #53E055, 'purple': #96EFFF);
+$stripe-color: #FFFEED;
+$dot-color: #FFFEED;
+$body-background-color: #E0F5FF;
+$card-color: #FFFEED;
+
+//define shape names and pattern names
+$shapes: oval, diamond, rectangle;
+$patterns: stripe, solid, polka-dot;
+
+//create color classes
+@each $name, $hex in $shape-colors {
+  .#{$name} {
+    background-color: map-get($shape-colors, #{$name});
+  }
+}
+
+//shape common properties
+.oval, .diamond, .rectangle {
+  height: $shape-height;
+  margin: $shape-margin;
+  box-shadow: $shape-shadow;
+  width: (
+    $card-width
+    - (($max-shapes-per-card + 1) * $shape-margin)       //less shape margins
+    - ($max-shapes-per-card * 2 * $shape-border-width)   //less shape borders
+    - ($card-padding * 2))                               //less card padding
+    /  $max-shapes-per-card                              //available space per shape
+    ;
+}
+
+//shape classes
+.oval {
+  border-radius: 50%;
+  height: $shape-height / 2;
+  width: $shape-height / 2;
+}
+
+.diamond-wrap {
+  filter: drop-shadow($shape-shadow); //can't box-shadow a clip-path (diamond), so wrap it with a filter div.
+}
+
+.diamond {
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 51%);
+}
+
+.rectangle {
+  border-radius: 8px / 50px;
+  height: $shape-height * .75;
+}
+
+//pattern classes. Use a mixin for stripes; call it from the loop with current color
+@mixin makeStripes($hex-color) {
+  background: repeating-linear-gradient(
+                  #{$shape-rotation}deg,
+                  $stripe-color,
+                  $stripe-color 4px,
+                  $hex-color 4px,
+                  $hex-color 12px
+  );
+}
+.solid {
+  z-index: inherit; //a rule can't be empty if you want to extend it, so I just stuck any-old prop here.
+}
+
+.polka-dot {
+  background-image: radial-gradient($dot-color 20%, transparent 0), radial-gradient($dot-color 20%, transparent 0);
+  background-size: 14px 14px;
+  background-position: 0 0, 7px 7px;
+}
+
+@each $shape in $shapes {
+  @each $color-name, $color-hex-code in $shape-colors {
+    @each $pattern in $patterns {
+      .#{$shape}-#{$color-name}-#{$pattern} {
+        @extend .#{$color-name};
+        @extend .#{$shape};
+        @if ($pattern == 'stripe') {
+        @debug shape is $shape, pattern is $pattern, hex-color is $color-hex-code;
+          @include makeStripes($color-hex-code)
+        } @else {
+          @extend .#{$pattern};
+        }
+      }
+    }
+  }
+}
+
+body {
+  background-color: $body-background-color;
+  padding: 48px;
+}
+
+.flex-centered-container {
+  flex: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  @extend .flex-centered-container;
+  flex-flow: row wrap;
+}
+
+.card {
+  @extend .flex-centered-container;
+  flex-flow: row nowrap;
+  height: $card-height;
+  width: $card-width;
+  padding: $card-padding;
+  margin: $card-margin;
+  border-radius: $card-border-radius;
+  box-shadow: $card-shadow;
+  background-color: $card-color;
+}
+
+.selected {
+  box-shadow: $selected-shadow;
+}

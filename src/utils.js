@@ -28,9 +28,9 @@ export const shapeMap = {
 }
 
 export const patternMap = {
-  1: 'clear',
+  1: 'stripe',
   2: 'solid',
-  3: 'polkaDot',
+  3: 'polka-dot',
 }
 
 export const deck = (() => {
@@ -70,9 +70,9 @@ export const removeCard = cardsInDeck => {
 export const pickCards = (number, deck, hand = []) => {
   if (!number) return [hand, deck];
   if (!deck.length) return [hand, deck];
-  
+
   const [card, newDeck] = removeCard(deck);
-  
+
   return pickCards(number - 1, newDeck, [...hand, card]);
 }
 
